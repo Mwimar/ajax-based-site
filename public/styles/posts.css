@@ -1,0 +1,45 @@
+#all-posts {
+    text-align: center;
+}
+
+#posts-list {
+    margin: 3rem auto;
+    max-width: 40rem;
+}
+
+.post-item {
+    margin: 1rem 0;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: rgb(250, 238, 222);
+
+}
+
+.post-item h2,
+.post-item p {
+    margin: 0.5rem 0;
+}
+
+.post-item-author {
+    font-style: italic;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+#posts-meta {
+    display:block;
+    font-style: italic;
+    color:grey;
+
+}
+
+#body {
+    white-space: pre-wrap;
+}
+ /* pre-wrap ensures whitespaces and linebreaks entered in user input are maintained */

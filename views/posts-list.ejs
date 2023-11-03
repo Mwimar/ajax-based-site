@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('includes/head', {title:'All posts'}) %>
+    <link rel="stylesheet" href="/styles/posts.css" />
+  </head>
+  <body>
+    <%- include('includes/header') %>
+    <main id="all-posts">
+      <h1>All Posts</h1>
+      <% if(!posts || posts.length===0) {%>
+        <p>No posts available, Try adding</p>
+        <a class="btn" href="/new-posts">Click Here to Add Posts</a>
+        <% }else{ %>
+          <ol id="posts-list">
+            <% for(post of posts){ %>
+              <li>
+                <%- include('includes/post-item', {post:post}) %>
+
+              </li>
+              <% } %>
+          </ol>
+          <% } %>
+     
+  <!-- //must send array data to the include i.e. post item, to render the contents of the list items
+    </main> -->
+  </body>
+</html>
