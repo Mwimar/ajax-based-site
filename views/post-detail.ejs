@@ -4,6 +4,7 @@
     <%- include('includes/head', {title:post.title}) %>
     <link rel="stylesheet" href="/styles/posts.css" />
     <link rel="stylesheet" href="/styles/forms.css" />
+    <script src="/scripts/comments.js" defer></script>
   </head>
   <body>
     <%- include('includes/header') %>
@@ -21,23 +22,24 @@
       <section>
         <p id="body"><%= post.body %></p>
       </section>
-      <form action="/posts/<%= post._id %>/comments" method="GET">
-        <button class="btn">Load Comments</button>
-      </form>
 
-      <section id="comments">
-        <% if (!comments){ %>
+      <button id="load-comments-btn" class="btn" data-postid="<% post._id %>">
+        Load Comments
+      </button>
+
+      <!-- <section id="comments">
+        <%# if (!comments){ %>
         <p>This post might have comments. You can add some</p>
-        <% }else if(comments.length===0){ %>
+        <%# }else if(comments.length===0){ %>
         <p>No comments found</p>
-        <% }else{ %>
+        <%# }else{ %>
         <ol>
-          <% for (const comment of comments) {%>
-          <li><%- include ('includes/comment-item', {comment:comment}) %></li>
+          <%# for (const comment of comments) {%>
+          <li><%#- include ('includes/comment-item', {comment:comment}) %></li>
 
-          <% } %> <% } %>
+          <%# } %> <%# } %>
         </ol>
-      </section>
+      </section> -->
 
       <section id="comments-section">
         <form id="comments">

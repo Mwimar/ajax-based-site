@@ -126,12 +126,12 @@ router.get("/posts/:id/comments", async function (req, res) {
   const comments = await db
     .getDb()
     .collection("comments")
-    .findOne({ _id: postId })
+    .find({ post_id: postId })
     .toArray();
+
   return res.render("post-detail", { post: post, comments: comments });
 });
-
-router.post("/posts/:id/comments", function (req, res) {
+router.post("/posts/:id/comments", async function (req, res) {
   const postId = new ObjectId(req.params.id);
   const newComment = {
     postId: postId,
@@ -139,9 +139,22 @@ router.post("/posts/:id/comments", function (req, res) {
     text: req.body.text,
   };
 
-  db.getDb().collection("comments").insertOne(newComment);
+  await db.getDb().collection("comments").insertOne(newComment);
 
   res.redirect("/posts/" + req.params.id);
 });
+
+// router.get("/posts/:id/comments", async function (req, res) {
+//   const postId = new ObjectId(req.params.id);
+
+//   const comments = await db
+//     .getDb()
+//     .collection("comments")
+//     .find({ post_id: postId })
+//     .toArray();
+
+//   console.log(comments);
+//   res.json({ comments: comments });
+// });
 
 module.exports = router;
