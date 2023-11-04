@@ -3,6 +3,7 @@
   <head>
     <%- include('includes/head', {title:post.title}) %>
     <link rel="stylesheet" href="/styles/posts.css" />
+    <link rel="stylesheet" href="/styles/forms.css" />
   </head>
   <body>
     <%- include('includes/header') %>
@@ -19,6 +20,21 @@
       <hr />
       <section>
         <p id="body"><%= post.body %></p>
+      </section>
+      <form action="/posts/<%= post._id %>/comments" method="GET">
+        <button class="btn">Load Comments</button>
+      </form>
+
+      <section id="comments-section">
+        <form id="comments">
+          <h2>Leave a Comment</h2>
+          <label for="title">Comment Title</label>
+          <input type="text" name="title" id="title" />
+
+          <label for="text">Your comment</label>
+          <textarea type="text" name="text" id="text"> </textarea>
+          <button class="btn">Save Comment</button>
+        </form>
       </section>
     </main>
   </body>
