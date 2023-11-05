@@ -28,21 +28,26 @@
       </button>
 
       <!-- <section id="comments">
-        <%# if (!comments){ %>
+        <%#  if (!comments){ %>
         <p>This post might have comments. You can add some</p>
-        <%# }else if(comments.length===0){ %>
-        <p>No comments found</p>
-        <%# }else{ %>
-        <ol>
-          <%# for (const comment of comments) {%>
-          <li><%#- include ('includes/comment-item', {comment:comment}) %></li>
+        <%#  }else if(comments.length===0){ %>
 
-          <%# } %> <%# } %>
+        <p>No comments found</p>
+        <%#  }else{ %>
+        <ol>
+          <%#  for (const comment of comments) {%>
+          <li><%# - include ('includes/comment-item', {comment:comment}) %></li>
+
+          <%#  } %> <%#  } %>
         </ol>
       </section> -->
 
       <section id="comments-section">
-        <form id="comments">
+        <form
+          id="comments"
+          action="/posts/<%= post._id %>/comments"
+          method="POST"
+        >
           <h2>Leave a Comment</h2>
           <label for="title">Comment Title</label>
           <input type="text" name="title" id="title" />

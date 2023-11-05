@@ -121,7 +121,19 @@ router.post("/posts/:id/delete", async function (req, res) {
 
 router.get("/posts/:id/comments", async function (req, res) {
   const postId = new ObjectId(req.params.id);
-  const post = await db.getDb().collection("posts").findOne({ _id: postId });
+
+  const comments = await db
+    .getDb()
+    .collection("comments")
+    .find({ post_id: postId })
+    .toArray();
+  console.log(comments);
+
+  res.json(comments);
+});
+
+router.get("/posts/:id/comments", async function (req, res) {
+  const postId = new ObjectId(req.params.id);
 
   const comments = await db
     .getDb()
@@ -129,8 +141,9 @@ router.get("/posts/:id/comments", async function (req, res) {
     .find({ post_id: postId })
     .toArray();
 
-  return res.render("post-detail", { post: post, comments: comments });
+  res.render("post-detail", { comments: comments }); // Pass 'comments' to the template
 });
+
 router.post("/posts/:id/comments", async function (req, res) {
   const postId = new ObjectId(req.params.id);
   const newComment = {
@@ -138,23 +151,11 @@ router.post("/posts/:id/comments", async function (req, res) {
     title: req.body.title,
     text: req.body.text,
   };
+  console.log(newComment);
 
   await db.getDb().collection("comments").insertOne(newComment);
 
   res.redirect("/posts/" + req.params.id);
 });
-
-// router.get("/posts/:id/comments", async function (req, res) {
-//   const postId = new ObjectId(req.params.id);
-
-//   const comments = await db
-//     .getDb()
-//     .collection("comments")
-//     .find({ post_id: postId })
-//     .toArray();
-
-//   console.log(comments);
-//   res.json({ comments: comments });
-// });
 
 module.exports = router;
