@@ -23,24 +23,24 @@
         <p id="body"><%= post.body %></p>
       </section>
 
-      <button id="load-comments-btn" class="btn" data-postid="<% post._id %>">
+      <!-- <button id="load-comments-btn" class="btn" data-postid="<%# post._id %>">
         Load Comments
-      </button>
+      </button> -->
 
-      <!-- <section id="comments">
-        <%#  if (!comments){ %>
+      <section id="comments">
+        <% if (!comments){ %>
         <p>This post might have comments. You can add some</p>
-        <%#  }else if(comments.length===0){ %>
+        <% }else if(comments.length===0){ %>
 
         <p>No comments found</p>
-        <%#  }else{ %>
+        <% }else{ %>
         <ol>
-          <%#  for (const comment of comments) {%>
-          <li><%# - include ('includes/comment-item', {comment:comment}) %></li>
+          <% for (const comment of comments) {%>
+          <li><% - include ('includes/comment-item', {comment:comment}) %></li>
 
-          <%#  } %> <%#  } %>
+          <% } %> <% } %>
         </ol>
-      </section> -->
+      </section>
 
       <section id="comments-section">
         <form
