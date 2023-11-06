@@ -46,11 +46,7 @@
       </section> -->
 
       <section id="comments-section">
-        <form
-          id="comments-form"
-          action="/posts/<%= post._id %>/comments"
-          method="POST"
-        >
+        <form data-postid="<%= post._id %>">
           <h2>Leave a Comment</h2>
           <label for="title">Comment Title</label>
           <input type="text" name="title" id="title" />
