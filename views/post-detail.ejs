@@ -4,7 +4,6 @@
     <%- include('includes/head', {title:post.title}) %>
     <link rel="stylesheet" href="/styles/posts.css" />
     <link rel="stylesheet" href="/styles/forms.css" />
-    <script src="/scripts/comments.js" defer></script>
   </head>
   <body>
     <%- include('includes/header') %>
@@ -23,9 +22,9 @@
         <p id="body"><%= post.body %></p>
       </section>
 
-      <!-- <button id="load-comments-btn" class="btn" data-postid="<%# post._id %>">
+      <button id="load-comments-btn" class="btn" data-postid="<%= post._id %>">
         Load Comments
-      </button> -->
+      </button>
 
       <section id="comments">
         <% if (!comments){ %>
@@ -58,5 +57,6 @@
         </form>
       </section>
     </main>
+    <script src="/scripts/comments.js" defer></script>
   </body>
 </html>

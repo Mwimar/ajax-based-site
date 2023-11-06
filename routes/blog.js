@@ -44,13 +44,13 @@ router.post("/posts", async function (req, res) {
     },
   };
   const result = await db.getDb().collection("posts").insertOne(newPost);
-  console.log(result);
+  // console.log(result);
   res.redirect("/posts");
 });
 
 router.get("/posts/:id", async function (req, res, next) {
   let postId = req.params.id;
-  console.log("Testing");
+  // console.log("Testing");
   try {
     postId = new ObjectId(postId);
   } catch (error) {
@@ -77,10 +77,10 @@ router.get("/posts/:id", async function (req, res, next) {
     .collection("comments")
     .find({ postId: postId })
     .toArray();
-  console.log(comments);
+  // console.log(comments);
 
   post.date = post.date.toISOString();
-
+  // console.log(post);
   res.render("post-detail", { post: post, comments: comments });
 });
 
@@ -128,16 +128,16 @@ router.post("/posts/:id/delete", async function (req, res) {
 
 router.get("/posts/:id/comments", async function (req, res) {
   const postId = new ObjectId(req.params.id);
-  console.log(postId);
+  // console.log(postId);
   console.log("Kitu hapo");
   const comments = await db
     .getDb()
     .collection("comments")
     .find({ postId: postId })
     .toArray();
-  // console.log(comments);
+  console.log(comments);
 
-  return res.json(comments);
+  res.json(comments);
 });
 
 router.post("/posts/:id/comments", async function (req, res) {
