@@ -20,20 +20,21 @@ function createCommentList(comments) {
   return commentListElement;
 }
 
-function saveComment(event) {
+async function saveComment(event) {
   event.preventDefault();
   const postId = commentsFormElement.dataset.postid;
 
   const enteredTitle = commentTitleElement.value;
   const enteredText = commentTextElement.value;
   const comment = { title: enteredTitle, text: enteredText };
-  fetch(`/posts/${postId}/comments`, {
+  const response = await fetch(`/posts/${postId}/comments`, {
     method: "POST",
     body: JSON.stringify(comment),
     headers: {
       "Content-Type": "application/json",
     },
   });
+  fetchCommentsForPost();
 }
 
 async function fetchCommentsForPost() {
