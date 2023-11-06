@@ -52,12 +52,12 @@ async function fetchCommentsForPost() {
   const postId = loadCommentsBtnElement.dataset.postid;
 
   try {
+    const response = await fetch(`/posts/${postId}/comments`);
     if (!response.ok) {
       alert("Fetching Comments Failed");
       return;
     }
 
-    const response = await fetch(`/posts/${postId}/comments`);
     const responseData = await response.json();
     if (responseData && responseData.length > 0) {
       const commentsListElement = createCommentList(responseData);

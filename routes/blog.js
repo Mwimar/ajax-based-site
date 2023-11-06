@@ -23,7 +23,6 @@ router.get("/posts", async function (req, res) {
 
 router.get("/new-posts", async function (req, res) {
   const authors = await db.getDb().collection("authors").find().toArray();
-  // console.log(authors);
   res.render("create-posts", { authors: authors });
 });
 router.post("/posts", async function (req, res) {
@@ -44,13 +43,13 @@ router.post("/posts", async function (req, res) {
     },
   };
   const result = await db.getDb().collection("posts").insertOne(newPost);
-  // console.log(result);
+
   res.redirect("/posts");
 });
 
 router.get("/posts/:id", async function (req, res, next) {
   let postId = req.params.id;
-  // console.log("Testing");
+
   try {
     postId = new ObjectId(postId);
   } catch (error) {
@@ -60,9 +59,7 @@ router.get("/posts/:id", async function (req, res, next) {
     .getDb()
     .collection("posts")
     .findOne({ _id: postId }, { summary: 0 });
-  // console.log(post);
 
-  console.log(postId);
   if (!post) {
     return res.status(404).render("404");
   }
@@ -77,10 +74,9 @@ router.get("/posts/:id", async function (req, res, next) {
     .collection("comments")
     .find({ postId: postId })
     .toArray();
-  // console.log(comments);
 
   post.date = post.date.toISOString();
-  // console.log(post);
+
   res.render("post-detail", { post: post, comments: comments });
 });
 
@@ -128,28 +124,26 @@ router.post("/posts/:id/delete", async function (req, res) {
 
 router.get("/posts/:id/comments", async function (req, res) {
   const postId = new ObjectId(req.params.id);
-  // console.log(postId);
-  console.log("Kitu hapo");
+
   const comments = await db
     .getDb()
     .collection("comments")
     .find({ postId: postId })
     .toArray();
-  console.log(comments);
 
   res.json(comments);
 });
 
 router.post("/posts/:id/comments", async function (req, res) {
-  // const postId = new ObjectId(req.params.id);
-  // // const newComment = {
-  // //   postId: postId,
-  // //   title: req.body.title,
-  // //   text: req.body.text,
-  // // };
-  // // // console.log(newComment);
-  // // await db.getDb().collection("comments").insertOne(newComment);
-  // res.json({ message: "Comment Added!" });
+  const postId = new ObjectId(req.params.id);
+  const newComment = {
+    postId: postId,
+    title: req.body.title,
+    text: req.body.text,
+  };
+
+  await db.getDb().collection("comments").insertOne(newComment);
+
   res.status(500).json({ message: "Comment Added!" });
 });
 
