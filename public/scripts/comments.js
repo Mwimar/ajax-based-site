@@ -34,7 +34,11 @@ async function saveComment(event) {
       "Content-Type": "application/json",
     },
   });
-  fetchCommentsForPost();
+  if (response.ok) {
+    fetchCommentsForPost();
+  } else {
+    alert("Could Not Send Comment!");
+  }
 }
 
 async function fetchCommentsForPost() {
