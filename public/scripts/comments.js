@@ -43,10 +43,14 @@ async function fetchCommentsForPost() {
 
   const response = await fetch(`/posts/${postId}/comments`);
   const responseData = await response.json();
-  // console.log(responseData);
-  const commentsListElement = createCommentList(responseData);
-  commentsSectionElement.innerHTML = "";
-  commentsSectionElement.appendChild(commentsListElement);
+  if (responseData && responseData.length > 0) {
+    const commentsListElement = createCommentList(responseData);
+    commentsSectionElement.innerHTML = "";
+    commentsSectionElement.appendChild(commentsListElement);
+  } else {
+    commentsSectionElement.firstElementChild.textContent =
+      "We could not Find any comments, Try adding";
+  }
 }
 
 loadCommentsBtnElement.addEventListener("click", fetchCommentsForPost);
