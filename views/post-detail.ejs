@@ -13,9 +13,7 @@
         <address>
           <a href="mailto:<%= post.author.email %>"> <%= post.author.name %></a>
         </address>
-        |
-
-        <time datetime="<%= post.date %>"><%= post.humanReadableDate %></time>
+        | <time datetime="<%= post.date %>"><%= post.humanReadableDate %></time>
       </section>
       <hr />
       <section>
@@ -29,21 +27,6 @@
       <section id="comments">
         <p>This post might have comments. You can add some</p>
       </section>
-
-      <!-- <section id="comments">
-        <%# if (!comments){ %>
-        <p>This post might have comments. You can add some</p>
-        <%# }else if(comments.length===0){ %>
-
-        <p>No comments found</p>
-        <%# }else{ %>
-        <ol>
-          <%# for (const comment of comments) {%>
-          <li><%# - include ('includes/comment-item', {comment:comment}) %></li>
-
-          <%# } %> <%# } %>
-        </ol>
-      </section> -->
 
       <section id="comments-section">
         <form data-postid="<%= post._id %>">
